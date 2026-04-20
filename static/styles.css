@@ -1,0 +1,441 @@
+:root {
+    --bg-top: #dce8f2;
+    --bg-bottom: #b8c8d6;
+    --panel: rgba(255, 255, 255, 0.92);
+    --text-main: #1f2937;
+    --text-soft: #5b6675;
+    --border: rgba(31, 41, 55, 0.12);
+    --free: #2f855a;
+    --free-soft: #dff5e7;
+    --occupied: #c05621;
+    --occupied-soft: #fde6d8;
+    --asphalt: #3f4854;
+    --lane-line: #f7d24a;
+    --shadow: 0 18px 45px rgba(17, 24, 39, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Trebuchet MS", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.7), transparent 32%),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+}
+
+.page-shell {
+    width: min(1100px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 40px 0 56px;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 5vw, 4.8rem);
+    line-height: 0.98;
+}
+
+.subtitle {
+    max-width: 650px;
+    margin: 18px 0 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-soft);
+}
+
+.add-slot-card,
+.parking-board,
+.slot-card {
+    backdrop-filter: blur(8px);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.add-slot-card {
+    display: grid;
+    gap: 10px;
+    padding: 22px;
+    border-radius: 20px;
+}
+
+.add-slot-card h2 {
+    margin: 0 0 6px;
+    font-size: 1.1rem;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+input,
+select,
+button {
+    font: inherit;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(24, 49, 83, 0.16);
+    background: rgba(255, 255, 255, 0.92);
+}
+
+button {
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.add-slot-card button {
+    margin-top: 8px;
+    padding: 12px 16px;
+    background: var(--asphalt);
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(31, 41, 55, 0.18);
+}
+
+.status-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 28px 0 16px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.free-pill {
+    background: var(--free-soft);
+    color: var(--free);
+}
+
+.occupied-pill {
+    background: var(--occupied-soft);
+    color: var(--occupied);
+}
+
+.total-pill {
+    background: rgba(24, 49, 83, 0.08);
+}
+
+.message {
+    min-height: 24px;
+    margin: 0 0 18px;
+    font-weight: 600;
+    color: var(--text-soft);
+}
+
+.message.error {
+    color: var(--occupied);
+}
+
+.message.success {
+    color: var(--free);
+}
+
+.parking-board {
+    padding: 24px;
+    border-radius: 28px;
+}
+
+.lot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.lot-header h2 {
+    margin: 6px 0 0;
+    font-size: 1.5rem;
+}
+
+.board-label {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--text-soft);
+}
+
+.lot-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--text-soft);
+}
+
+.legend-box {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.free-box {
+    background: var(--free-soft);
+    border: 1px solid rgba(47, 133, 90, 0.25);
+}
+
+.occupied-box {
+    background: var(--occupied-soft);
+    border: 1px solid rgba(192, 86, 33, 0.25);
+}
+
+.drive-lane {
+    margin: 10px 0 22px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 40px,
+            var(--lane-line) 40px,
+            var(--lane-line) 62px
+        ),
+        var(--asphalt);
+    color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.slot-card {
+    padding: 16px 16px 18px;
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 248, 252, 0.95));
+}
+
+.slot-card::before {
+    content: "";
+    position: absolute;
+    inset: auto 16px 0 16px;
+    height: 8px;
+    border-radius: 999px;
+}
+
+.slot-card.free::before {
+    background: var(--free);
+}
+
+.slot-card.occupied::before {
+    background: var(--occupied);
+}
+
+.bay-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.bay-line {
+    width: 34%;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(31, 41, 55, 0.12);
+}
+
+.parked-car {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 76px;
+    margin: 0 auto 12px;
+    border-radius: 16px;
+    background: transparent;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.parked-car.visible {
+    background: linear-gradient(180deg, rgba(255, 217, 120, 0.22), rgba(244, 182, 63, 0.12));
+    box-shadow: inset 0 0 0 1px rgba(244, 182, 63, 0.18);
+    opacity: 1;
+}
+
+.car-svg {
+    width: 120px;
+    height: 60px;
+    display: block;
+}
+
+.car-body {
+    fill: #f4b63f;
+}
+
+.car-roof {
+    fill: #ffcf66;
+}
+
+.car-window {
+    fill: #dce8f2;
+}
+
+.car-wheel {
+    fill: #2f3640;
+}
+
+.car-wheel-inner {
+    fill: #8b98a8;
+}
+
+.car-light-front {
+    fill: #fef3c7;
+}
+
+.car-light-back {
+    fill: #fca5a5;
+}
+
+.slot-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.slot-number {
+    margin: 4px 0 0;
+    font-size: 1.8rem;
+    letter-spacing: 0.04em;
+}
+
+.slot-status {
+    margin: 2px 0 0;
+    font-weight: 700;
+    padding: 8px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+}
+
+.slot-status.free {
+    color: var(--free);
+    background: var(--free-soft);
+}
+
+.slot-status.occupied {
+    color: var(--occupied);
+    background: var(--occupied-soft);
+}
+
+.slot-id {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-soft);
+}
+
+.slot-caption {
+    margin: 8px 0 0;
+    font-size: 0.86rem;
+    color: var(--text-soft);
+}
+
+.slot-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-button {
+    padding: 11px 14px;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+.occupy-button {
+    background: var(--occupied-soft);
+    color: var(--occupied);
+}
+
+.free-button {
+    background: var(--free-soft);
+    color: var(--free);
+}
+
+.edit-button {
+    background: rgba(24, 49, 83, 0.08);
+    color: var(--text-main);
+}
+
+.delete-button {
+    background: rgba(192, 57, 43, 0.12);
+    color: var(--occupied);
+}
+
+@media (max-width: 760px) {
+    .page-shell {
+        width: min(100% - 24px, 1100px);
+        padding-top: 24px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .lot-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
