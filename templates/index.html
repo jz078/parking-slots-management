@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Slot Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">Smart Parking Dashboard</p>
+                <h1>Parking Slot Tracker</h1>
+                <p class="subtitle">
+                    Track every parking bay in real time with clear status colors and fast slot controls.
+                </p>
+            </div>
+
+            <form id="add-slot-form" class="add-slot-card">
+                <h2>Add Parking Slot</h2>
+                <label for="slot-number">Slot Number</label>
+                <input id="slot-number" name="slot_number" type="text" placeholder="C1" maxlength="10" required>
+
+                <label for="slot-status">Initial Status</label>
+                <select id="slot-status" name="status">
+                    <option value="FREE">FREE</option>
+                    <option value="OCCUPIED">OCCUPIED</option>
+                </select>
+
+                <button type="submit">Add Slot</button>
+            </form>
+        </section>
+
+        <section class="status-bar">
+            <div class="pill free-pill">FREE <span id="free-count">0</span></div>
+            <div class="pill occupied-pill">OCCUPIED <span id="occupied-count">0</span></div>
+            <div class="pill total-pill">TOTAL <span id="total-count">0</span></div>
+        </section>
+
+        <p id="message" class="message" aria-live="polite"></p>
+
+        <section id="slots-grid" class="slots-grid" aria-label="Parking slot grid"></section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
